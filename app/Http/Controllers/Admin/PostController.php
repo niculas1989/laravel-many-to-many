@@ -117,12 +117,15 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:5', 'max:50'],
             'content' => 'required|string',
-            'image' => 'nullable|url'
+            'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'La lunghezza minima del titolo è di 5 caratteri.',
             'title.max' => 'La lunghezza massima del titolo è di 50 caratteri.',
-            'title.unique' => "Esiste già un post: $request->title."
+            'title.unique' => "Esiste già un post: $request->title.",
+            'tags.exists' => 'Un tag appena selezionato non è valido.'
         ]);
 
 
@@ -133,6 +136,9 @@ class PostController extends Controller
 
         $data['slug'] = Str::slug($request->title, '-');
         $post->update($data);
+
+        if (!array_key_exists('tags', $data)) $post->tags()->detach();
+        else $post->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.show', $post->id);
     }
