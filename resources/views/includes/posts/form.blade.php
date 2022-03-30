@@ -68,6 +68,12 @@
                     <label class="form-check-label text-white" for="is-published">Pubblicato</label>
                 </div>
             </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <p class="text-white">QUI</p>
+                </div>
+                <hr>
+            </div>
         </div>
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-success"><i class="fa-solid fa-check mr-2"></i>Conferma</button>
