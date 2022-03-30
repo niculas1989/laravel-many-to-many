@@ -72,7 +72,8 @@
                 <div class="d-flex justify-content-around">
                     @foreach($tags as $t)
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="tag-{{ $loop->iteration }}" value="{{ $t->id }}" name="tags[]"><label class="custom-control-label text-danger" for="tag-{{ $loop->iteration }}">{{ $t->label }}</label>
+                        <input type="checkbox" class="custom-control-input" id="tag-{{ $loop->iteration }}" value="{{ $t->id }}" name="tags[]" @if(in_array($t->id, old('tags', $post_tags_ids ?? []))) checked @endif>
+                        <label class="custom-control-label text-danger" for="tag-{{ $loop->iteration }}">{{ $t->label }}</label>
                     </div>
                     @endforeach
                 </div>

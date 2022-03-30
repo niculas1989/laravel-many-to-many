@@ -17,7 +17,8 @@ class CategorySeeder extends Seeder
             ['label' => 'XBOX 360', 'color' => 'success'],
             ['label' => 'XBOX S', 'color' => 'warning'],
             ['label' => 'Nintendo-Switch', 'color' => 'danger'],
-            ['label' => 'PSP', 'color' => 'secondary']
+            ['label' => 'PS5', 'color' => 'primary'],
+            ['label' => 'PSP', 'color' => 'secondary'],
         ];
 
         foreach ($categories as $category) {

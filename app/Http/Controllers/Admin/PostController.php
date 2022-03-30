@@ -46,12 +46,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        /* dd($request->all()); */
         $request->validate([
             'title' => 'required|string|unique:posts|min:5|max:50',
             'content' => 'required|string',
             'image' => 'url',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists: tags,id'
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'La lunghezza minima del titolo è di 5 caratteri.',
@@ -70,6 +72,9 @@ class PostController extends Controller
         }
 
         $post->save();
+
+
+        if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
 
         return redirect()->route('admin.posts.index')->with('message', 'Post creato con successo')->with('type', 'success');
     }
@@ -94,8 +99,10 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $tags = Tag::all();
+        $post_tags_ids = $post->tags->pluck('id')->toArray();
         $categories = Category::all();
-        return view('admin.posts.edit', compact('tags', 'post', 'categories'));
+
+        return view('admin.posts.edit', compact('tags', 'post', 'categories', 'post_tags_ids'));
     }
 
     /**
