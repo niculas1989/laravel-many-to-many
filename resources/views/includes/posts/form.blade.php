@@ -69,8 +69,13 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="d-flex justify-content-center">
-                    <p class="text-white">QUI</p>
+                <div class="d-flex justify-content-around">
+                    @foreach($tags as $t)
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="tag-{{ $loop->iteration }}">
+                        <label class="custom-control-label text-white" for="tag-{{ $loop->iteration }}">{{ $t->label }}</label>
+                    </div>
+                    @endforeach
                 </div>
                 <hr>
             </div>
