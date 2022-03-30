@@ -50,12 +50,14 @@ class PostController extends Controller
             'title' => 'required|string|unique:posts|min:5|max:50',
             'content' => 'required|string',
             'image' => 'url',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists: tags,id'
         ], [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'La lunghezza minima del titolo è di 5 caratteri.',
             'title.max' => 'La lunghezza massima del titolo è di 50 caratteri.',
-            'title.unique' => "Esiste già un post: $request->title."
+            'title.unique' => "Esiste già un post: $request->title.",
+            'tags.exists' => 'Un tag appena selezionato non è valido.'
         ]);
 
         $data = $request->all();
