@@ -24,7 +24,6 @@
                 <th scope="col">Titolo</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Pubblicato</th>
-                <th scope="col">Creato il:</th>
                 <th scope="col">Modificato il:</th>
                 <th scope="col" class="text-center">Actions</th>
             </tr>
@@ -51,7 +50,6 @@
                         </button>
                     </form>
                 </td>
-                <td>{{ $p->created_at }}</td>
                 <td>{{ $p->updated_at }}</td>
                 <td class="d-flex justify-content-center align-items-center">
                     <a href="{{ route('admin.posts.edit', $p->id) }}" class="btn btn-primary mr-3"><i class="fa-solid fa-pencil"></i></a>
