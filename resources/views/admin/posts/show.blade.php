@@ -7,6 +7,13 @@
     @if($post->image)
     <img src="{{ $post->image }}" alt="{{ $post->slug}}">
     @endif
+    <div class="d-flex justify-content-center">
+        @forelse($post->tags as $t)
+        <span class="badge badge-pill m-5" style="background-color: {{ $t->color }}">{{ $t->label }}</span>
+        @empty
+
+        @endforelse
+    </div>
     <div class="d-flex justify-content-end align-items-center mt-5">
         <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary mr-2"><i class="fa-solid fa-arrow-rotate-left"> TORNA INDIETRO</i></a>
         <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post" class="delete-form">
