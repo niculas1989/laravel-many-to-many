@@ -72,8 +72,7 @@
                 <div class="d-flex justify-content-around">
                     @foreach($tags as $t)
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="tag-{{ $loop->iteration }}">
-                        <label class="custom-control-label text-white" for="tag-{{ $loop->iteration }}">{{ $t->label }}</label>
+                        <input type="checkbox" class="custom-control-input" id="tag-{{ $loop->iteration }}" value="{{ $t->id }}"><label class="custom-control-label text-white" for="tag-{{ $loop->iteration }}">{{ $t->label }}</label>
                     </div>
                     @endforeach
                 </div>
