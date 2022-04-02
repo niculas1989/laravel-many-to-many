@@ -5,7 +5,7 @@
     <h1>{{ $post->title }}</h1>
     <p class="text-white">{{ $post->content }}</p>
     @if($post->image)
-    <img src="{{ $post->image }}" alt="{{ $post->slug}}">
+    <img src="{{ asset("storage/$post->image") }}" alt="{{ $post->slug}}">
     @endif
     <div class="d-flex justify-content-center">
         @forelse($post->tags as $t)

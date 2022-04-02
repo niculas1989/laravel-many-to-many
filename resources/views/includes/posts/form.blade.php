@@ -8,10 +8,10 @@
 </div>
 @endif
 @if($post->exists)
-<form action="{{ route('admin.posts.update', $post->id) }}" method="POST" novalidate>
+<form action="{{ route('admin.posts.update', $post->id) }}" method="POST" novalidate enctype="multipart/form-data">
     @method('PUT')
     @else
-    <form action="{{ route('admin.posts.store') }}" method="POST" novalidate>
+    <form action="{{ route('admin.posts.store') }}" method="POST" novalidate enctype="multipart/form-data">
         @endif
         @csrf
         <div class="row">
@@ -40,17 +40,15 @@
                 @enderror
             </div>
             <div class="col-12">
-                <form>
-                    <div class="form-group @error('image') is-invalid @enderror">
-                        <label for="image" class="text-white">Seleziona un immagine da caricare</label>
-                        <input type="file" class="form-control-file text-white" id="image" name="image">
-                        @error('image')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
+                <div class="form-group @error('image') is-invalid @enderror">
+                    <label for="image" class="text-white">Seleziona un immagine da caricare</label>
+                    <input type="file" class="form-control-file text-white" id="image" name="image">
+                    @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
                     </div>
-                </form>
+                    @enderror
+                </div>
             </div>
             <!-- <div class="col-10">
                 <div class="form-group @error('image') is-invalid @enderror">

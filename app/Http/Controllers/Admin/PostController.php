@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -51,7 +52,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|min:5|max:50',
             'content' => 'required|string',
-            'image' => 'url',
+            'image' => 'nullable|image',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id'
         ], [
@@ -64,6 +65,11 @@ class PostController extends Controller
 
         $data = $request->all();
         $post = new Post();
+
+        if (array_key_exists('image', $data)) {
+            $url_img = Storage::put('post_images', $data['image']);
+            $data['image'] = $url_img;
+        }
 
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
@@ -117,7 +123,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:5', 'max:50'],
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id'
         ], [
