@@ -39,20 +39,33 @@
                 </div>
                 @enderror
             </div>
-            <div class="col-10">
+            <div class="col-12">
+                <form>
+                    <div class="form-group @error('image') is-invalid @enderror">
+                        <label for="image" class="text-white">Seleziona un immagine da caricare</label>
+                        <input type="file" class="form-control-file text-white" id="image" name="image">
+                        @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-10">
                 <div class="form-group @error('image') is-invalid @enderror">
                     <label for="image" class="text-white">Immagine Post</label>
                     <input type="url" class="form-control" id="image" placeholder="immagine" name="image">
-                    @error('title')
+                    @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
-            </div>
-            <div class="col 2">
+            </div> -->
+            <!-- <div class="col 2">
                 <img src="{{ old('image', $post->image) ?? 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg'}}" alt="placeholder" width=50; class="img-fluid" id="preview">
-            </div>
+            </div> -->
             <div class="col-12 d-flex justify-content-between">
                 <div class="form-group">
                     <label for="category" class="text-white">Seleziona la Categoria</label>
