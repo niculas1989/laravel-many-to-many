@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -10,6 +11,7 @@ use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use App\Mail\SendNewMail;
 
 class PostController extends Controller
 {
@@ -82,6 +84,8 @@ class PostController extends Controller
 
         if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
 
+        $mail = new SendNewMail();
+        Mail::to('nicolas.maranzano@libero.it')->send($mail);
         return redirect()->route('admin.posts.index')->with('message', 'Post creato con successo')->with('type', 'success');
     }
 
